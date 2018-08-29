@@ -9,16 +9,17 @@
 //Note for morning: I may want to make an array for each card and include prefixes as elements. might be easier.
 
 var detectNetwork = function(cardNumber) {
-  var firstDigit = cardNumber.slice(0, 1);	
-  var firstTwoDigits = cardNumber.slice(0, 2);
-  var firstThreeDigits = cardNumber.slice(0, 3);
-  var firstFourDigits = cardNumber.slice(0, 4);
+  var firstDigit = parseInt(cardNumber.slice(0, 1));	
+  var firstTwoDigits = parseInt(cardNumber.slice(0, 2));
+  var firstThreeDigits = parseInt(cardNumber.slice(0, 3));
+  var firstFourDigits = parseInt(cardNumber.slice(0, 4));
   var cardLength = cardNumber.length;
 
-  var dinerPrefix = ['38', '39'];
-  var amexPrefix = ['34', '37'];
+  var dinerPrefix = [38, 39];
+  var amexPrefix = [34, 37];
   var visaLength = [13, 16, 19];
-  var mastercardPrefix = ['51', '52', '53', '54', '55'];
+  var mastercardPrefix = [51, 52, 53, 54, 55];
+  var discoverLength = [16, 19];
 
   if ((dinerPrefix.includes(firstTwoDigits)) && (cardLength === 14)) {
   	return 'Diner\'s Club';
@@ -32,12 +33,12 @@ var detectNetwork = function(cardNumber) {
   else if ((mastercardPrefix.includes(firstTwoDigits)) && (cardLength === 16)) {
   	return 'MasterCard';
   }
-  // else if ( ((firstFourDigits === 6011) || ((firstThreeDigits >= 644) && (firstThreeDigits <= 649)) || (firstTwoDigits === 65)) && (cardLength === 16, 19) ) {
-  //   return 'Discover';
-  // }
+  else if ( ((firstFourDigits === 6011) || ((firstThreeDigits >= 644) && (firstThreeDigits <= 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
+    return 'Discover';
+  }
   // else if ((firstFourDigits === 5018, 5020, 5038, 6304) && ((cardLength >= 12) && (cardLength <= 19))) {
   //   return 'Maestro'; 
   // }
 };
 
-console.log(detectNetwork('5166666666666666'));
+console.log(detectNetwork('6011949596979897'));
