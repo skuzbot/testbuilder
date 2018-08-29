@@ -18,8 +18,8 @@ var detectNetwork = function(cardNumber) {
   var dinerPrefix = [38, 39];
   var amexPrefix = [34, 37];
   var visaLength = [13, 16, 19];
-  var mastercardPrefix = [51, 52, 53, 54, 55];
   var discoverLength = [16, 19];
+
 
   if ((dinerPrefix.includes(firstTwoDigits)) && (cardLength === 14)) {
   	return 'Diner\'s Club';
@@ -27,10 +27,10 @@ var detectNetwork = function(cardNumber) {
   else if ((amexPrefix.includes(firstTwoDigits)) && (cardLength === 15)) {
   	return 'American Express';
   }
-  else if ((firstDigit === '4') && (visaLength.includes(cardLength))) {
+  else if ((firstDigit === 4) && (visaLength.includes(cardLength))) {
   	return 'Visa';
   }
-  else if ((mastercardPrefix.includes(firstTwoDigits)) && (cardLength === 16)) {
+  else if (((firstTwoDigits >= 51) && (firstTwoDigits <= 55)) && (cardLength === 16)) {
   	return 'MasterCard';
   }
   else if ( ((firstFourDigits === 6011) || ((firstThreeDigits >= 644) && (firstThreeDigits <= 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
@@ -41,4 +41,4 @@ var detectNetwork = function(cardNumber) {
   // }
 };
 
-console.log(detectNetwork('6011949596979897'));
+console.log(detectNetwork('4119495969798'));
