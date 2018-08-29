@@ -19,6 +19,7 @@ var detectNetwork = function(cardNumber) {
   var amexPrefix = [34, 37];
   var visaLength = [13, 16, 19];
   var discoverLength = [16, 19];
+  var maestroPrefix = [5018, 5020, 5038, 6304];
 
 
   if ((dinerPrefix.includes(firstTwoDigits)) && (cardLength === 14)) {
@@ -36,9 +37,7 @@ var detectNetwork = function(cardNumber) {
   else if ( ((firstFourDigits === 6011) || ((firstThreeDigits >= 644) && (firstThreeDigits <= 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
     return 'Discover';
   }
-  // else if ((firstFourDigits === 5018, 5020, 5038, 6304) && ((cardLength >= 12) && (cardLength <= 19))) {
-  //   return 'Maestro'; 
-  // }
+  else if ((maestroPrefix.includes(firstFourDigits)) && ((cardLength >= 12) && (cardLength <= 19))) {
+    return 'Maestro'; 
+  }
 };
-
-console.log(detectNetwork('4119495969798'));
