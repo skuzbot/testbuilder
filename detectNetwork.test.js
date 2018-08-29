@@ -142,6 +142,8 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
+  var expect = chai.expect;
+  
   it('has a prefix of 6011 and a length of 16', function() {
     expect(detectNetwork('6011123456789012')).to.equal('Discover');
   });
