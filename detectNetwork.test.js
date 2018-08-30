@@ -171,13 +171,38 @@ describe('Discover', function() {
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
   var expect = chai.expect;
+  var str = '8';
 
-  it('has a prefix of 5018 and a length of 12', function() {
-    expect(detectNetwork('501812345678')).to.equal('Maestro');
-  });
-  it('has a prefix of 5020 and a length of 19', function() {
-    expect(detectNetwork('5020123456789012345')).to.equal('Maestro');
-  });
+  //need 5018 12-19, 5020 12-19, 5038 12-19, 6304 12-19
+
+  // it('has a prefix of 5018 and a length of 12', function() {
+  //   expect(detectNetwork('501812345678')).to.equal('Maestro');
+  // });
+  // it('has a prefix of 5020 and a length of 19', function() {
+  //   expect(detectNetwork('5020123456789012345')).to.equal('Maestro');
+  // });
+
+  for (var length = 12; length <= 19; length++) {
+  (function(length) {
+
+    it('has a prefix of 5018 and a length of ' + length, function() {
+      expect(detectNetwork('5018' + str.repeat(length - 4))).to.equal('Maestro');
+    });
+
+    it('has a prefix of 5020 and a length of ' + length, function() {
+      expect(detectNetwork('5020' + str.repeat(length - 4))).to.equal('Maestro');
+    });
+
+    it('has a prefix of 5038 and a length of ' + length, function() {
+      expect(detectNetwork('5038' + str.repeat(length - 4))).to.equal('Maestro');
+    });
+
+    it('has a prefix of 6304 and a length of ' + length, function() {
+      expect(detectNetwork('6304' + str.repeat(length - 4))).to.equal('Maestro');
+    });
+    
+  })(length)}
+
 });
 
 describe('should support China UnionPay')
