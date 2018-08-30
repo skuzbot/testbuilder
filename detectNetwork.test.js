@@ -137,14 +137,14 @@ describe('Maestro', function() {
 });
 
 // China UnionPay   prefix 622126-622925, 624-626, 6282-6288  length 6-19
-describe('China UnionPay', function() {
-  var expect = chai.expect;
-  var str = '8';
+// describe('China UnionPay', function() {
+//   var expect = chai.expect;
+//   var str = '8';
 
-  for (var prefix = 622126;)
+//   for (var prefix = 622126; prefix <= 622925; prefix++) // ********** Left off here. Started writing the for loop for prefix.
   
 
-});
+// });
 
 describe('should support China UnionPay')
 describe('should support Switch')

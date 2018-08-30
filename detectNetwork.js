@@ -3,10 +3,10 @@
 // American Express   prefix 34, 37                                length 15
 // Visa               prefix 4                                     length 13, 16, 19
 // MasterCard         prefix 51-55                                 length 16
-// Discover           prefix of 6011, 644-649, 65                  length 16, 19.
-// Maestro            prefix 5018, 5020, 5038, 6304                length 12-19.
+// Discover           prefix 6011, 644-649, 65                     length 16, 19
+// Maestro            prefix 5018, 5020, 5038, 6304                length 12-19
 // China UnionPay     prefix 622126-622925, 624-626, 6282-6288                      length 6-19
-// Switch             prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759     length 16, 18, or 19.
+// Switch             prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759     length 16, 18, or 19
 
 
 
@@ -40,7 +40,7 @@ var detectNetwork = function(cardNumber) {
   else if ((firstDigit === 4) && (visaLength.includes(cardLength))) {
   	return 'Visa';
   }
-  else if (((firstTwoDigits >= 51) && (firstTwoDigits <= 55)) && (cardLength === 16)) {
+  else if ((isBetween(firstTwoDigits, 51, 55)) && (cardLength === 16)) { 
   	return 'MasterCard';
   }
   else if ( ((firstFourDigits === 6011) || (isBetween(firstThreeDigits, 644, 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
@@ -49,16 +49,12 @@ var detectNetwork = function(cardNumber) {
   else if ((maestroPrefix.includes(firstFourDigits)) && (isBetween(cardLength, 12, 19))) {
     return 'Maestro'; 
   }
-  else if (((isBetween(firstSixDigits, 622126, 622925) || (isBetween(firstThreeDigits, 624, 626)) || (isBetween(firstFourDigits, 6282, 6288))) && (isBetween(cardLength, 6, 19))) {
+  else if (((isBetween(firstSixDigits, 622126, 622925)) || (isBetween(firstThreeDigits, 624, 626)) || (isBetween(firstFourDigits, 6282, 6288))) && (isBetween(cardLength, 6, 19))) {
     return 'China UnionPay';
   };
+
 };
 
-//console.log(detectNetwork('6441234567890123'));
-
-// ((firstThreeDigits >= 644) && (firstThreeDigits <= 649))
-
-//(cardLength >= 12) && (cardLength <= 19)
 
 
 
