@@ -1,18 +1,22 @@
 //Detects Credit Card Network from Card Number
-// Diners club        prefix 38, 39                 length 14
-// American Express   prefix 34, 37                 lenfth 15
-// Visa               prefix 4                      length 13, 16, 19
-// MasterCard         prefix 51-55                  length 16
-// Discover           prefix of 6011, 644-649, 65   length 16, 19.
-// Maestro            prefix 5018, 5020, 5038, 6304 length 12-19.
+// Diners club        prefix 38, 39                                length 14
+// American Express   prefix 34, 37                                length 15
+// Visa               prefix 4                                     length 13, 16, 19
+// MasterCard         prefix 51-55                                 length 16
+// Discover           prefix of 6011, 644-649, 65                  length 16, 19.
+// Maestro            prefix 5018, 5020, 5038, 6304                length 12-19.
+// China UnionPay     prefix 622126-622925, 624-626, 6282-6288                      length 6-19
+// Switch             prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759     length 16, 18, or 19.
 
-//Note for morning: I may want to make an array for each card and include prefixes as elements. might be easier.
+
+
 
 var detectNetwork = function(cardNumber) {
   var firstDigit = parseInt(cardNumber.slice(0, 1));	
   var firstTwoDigits = parseInt(cardNumber.slice(0, 2));
   var firstThreeDigits = parseInt(cardNumber.slice(0, 3));
   var firstFourDigits = parseInt(cardNumber.slice(0, 4));
+  var firstSixDigits = parseInt(cardNumber.slice(0, 6));
   var cardLength = cardNumber.length;
 
   var dinerPrefix = [38, 39];
@@ -20,6 +24,11 @@ var detectNetwork = function(cardNumber) {
   var visaLength = [13, 16, 19];
   var discoverLength = [16, 19];
   var maestroPrefix = [5018, 5020, 5038, 6304];
+
+  //in range function
+  var isBetween = function(x, min, max) {
+    return (x >= min) && (x <= max);
+  };
 
 
   if ((dinerPrefix.includes(firstTwoDigits)) && (cardLength === 14)) {
@@ -34,10 +43,23 @@ var detectNetwork = function(cardNumber) {
   else if (((firstTwoDigits >= 51) && (firstTwoDigits <= 55)) && (cardLength === 16)) {
   	return 'MasterCard';
   }
-  else if ( ((firstFourDigits === 6011) || ((firstThreeDigits >= 644) && (firstThreeDigits <= 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
+  else if ( ((firstFourDigits === 6011) || (isBetween(firstThreeDigits, 644, 649)) || (firstTwoDigits === 65)) && (discoverLength.includes(cardLength)) ) {
     return 'Discover';
   }
-  else if ((maestroPrefix.includes(firstFourDigits)) && ((cardLength >= 12) && (cardLength <= 19))) {
+  else if ((maestroPrefix.includes(firstFourDigits)) && (isBetween(cardLength, 12, 19))) {
     return 'Maestro'; 
   }
+  // else if ( ( ((firstSixDigits >= 622126) && ( firstSixDigits <= 622925)) || (() && ()) || (() && ()) )        && ((cardLength >= 6) && (cardLength <= 19))) {
+
+  // }
+
 };
+
+//console.log(detectNetwork('6441234567890123'));
+
+// ((firstThreeDigits >= 644) && (firstThreeDigits <= 649))
+
+//(cardLength >= 12) && (cardLength <= 19)
+
+
+

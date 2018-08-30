@@ -173,15 +173,6 @@ describe('Maestro', function() {
   var expect = chai.expect;
   var str = '8';
 
-  //need 5018 12-19, 5020 12-19, 5038 12-19, 6304 12-19
-
-  // it('has a prefix of 5018 and a length of 12', function() {
-  //   expect(detectNetwork('501812345678')).to.equal('Maestro');
-  // });
-  // it('has a prefix of 5020 and a length of 19', function() {
-  //   expect(detectNetwork('5020123456789012345')).to.equal('Maestro');
-  // });
-
   for (var length = 12; length <= 19; length++) {
   (function(length) {
 
