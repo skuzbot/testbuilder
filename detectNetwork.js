@@ -49,10 +49,9 @@ var detectNetwork = function(cardNumber) {
   else if ((maestroPrefix.includes(firstFourDigits)) && (isBetween(cardLength, 12, 19))) {
     return 'Maestro'; 
   }
-  // else if ( ( ((firstSixDigits >= 622126) && ( firstSixDigits <= 622925)) || (() && ()) || (() && ()) )        && ((cardLength >= 6) && (cardLength <= 19))) {
-
-  // }
-
+  else if (((isBetween(firstSixDigits, 622126, 622925) || (isBetween(firstThreeDigits, 624, 626)) || (isBetween(firstFourDigits, 6282, 6288))) && (isBetween(cardLength, 6, 19))) {
+    return 'China UnionPay';
+  };
 };
 
 //console.log(detectNetwork('6441234567890123'));
