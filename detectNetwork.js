@@ -24,12 +24,13 @@ var detectNetwork = function(cardNumber) {
   var visaLength = [13, 16, 19];
   var discoverLength = [16, 19];
   var maestroPrefix = [5018, 5020, 5038, 6304];
+  var switchPrefix = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  var switchLength = [16, 18, 19];
 
   //in range function
   var isBetween = function(x, min, max) {
     return (x >= min) && (x <= max);
   };
-
 
   if ((dinerPrefix.includes(firstTwoDigits)) && (cardLength === 14)) {
   	return 'Diner\'s Club';
@@ -37,7 +38,7 @@ var detectNetwork = function(cardNumber) {
   else if ((amexPrefix.includes(firstTwoDigits)) && (cardLength === 15)) {
   	return 'American Express';
   }
-  else if ((firstDigit === 4) && (visaLength.includes(cardLength))) {
+  else if ((firstDigit === 4) && (!switchPrefix.includes(firstFourDigits)) && (visaLength.includes(cardLength))) {
   	return 'Visa';
   }
   else if ((isBetween(firstTwoDigits, 51, 55)) && (cardLength === 16)) { 
@@ -51,7 +52,11 @@ var detectNetwork = function(cardNumber) {
   }
   else if (((isBetween(firstSixDigits, 622126, 622925)) || (isBetween(firstThreeDigits, 624, 626)) || (isBetween(firstFourDigits, 6282, 6288))) && (isBetween(cardLength, 6, 19))) {
     return 'China UnionPay';
-  };
+  }
+  // Switch prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759     length 16, 18, or 19
+  else if ((switchPrefix.includes(firstFourDigits)) || (switchPrefix.includes(firstSixDigits)) && (switchLength.includes(cardLength))) {
+    return 'Switch';
+  }
 
 };
 

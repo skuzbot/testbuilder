@@ -136,15 +136,51 @@ describe('Maestro', function() {
 
 });
 
-// China UnionPay   prefix 622126-622925, 624-626, 6282-6288  length 6-19
-// describe('China UnionPay', function() {
-//   var expect = chai.expect;
-//   var str = '8';
+//China UnionPay   prefix 622126-622925, 624-626, 6282-6288  length 6-19
+describe('China UnionPay', function() {
+  var expect = chai.expect;
+  var str = '8';
 
-//   for (var prefix = 622126; prefix <= 622925; prefix++) // ********** Left off here. Started writing the for loop for prefix.
-  
+  for (var prefix = 622126; prefix <= 622925; prefix++) {
+      (function(prefix) {
 
-// });
+    for (var length = 6; length <= 19; length++) {
+    (function(length) {
 
-describe('should support China UnionPay')
+      it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+        expect(detectNetwork(prefix + str.repeat(length - 6))).to.equal('China UnionPay');
+      });
+      
+    })(length)}
+  })(prefix)} 
+
+  for (var prefix = 624; prefix <= 626; prefix++) {
+    (function(prefix) {
+
+    for (var length = 6; length <= 19; length++) {
+    (function(length) {
+
+      it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+        expect(detectNetwork(prefix + str.repeat(length - 3))).to.equal('China UnionPay');
+      });
+      
+    })(length)}
+  })(prefix)} 
+
+      for (var prefix = 6282; prefix <= 6288; prefix++) {
+      (function(prefix) {
+
+    for (var length = 6; length <= 19; length++) {
+    (function(length) {
+
+      it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+        expect(detectNetwork(prefix + str.repeat(length - 4))).to.equal('China UnionPay');
+      });
+      
+    })(length)}
+  })(prefix)} 
+
+  });
+
+// Switch   prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759   length 16, 18, or 19
 describe('should support Switch')
