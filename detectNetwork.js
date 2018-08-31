@@ -53,7 +53,6 @@ var detectNetwork = function(cardNumber) {
   else if (((isBetween(firstSixDigits, 622126, 622925)) || (isBetween(firstThreeDigits, 624, 626)) || (isBetween(firstFourDigits, 6282, 6288))) && (isBetween(cardLength, 6, 19))) {
     return 'China UnionPay';
   }
-  // Switch prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759     length 16, 18, or 19
   else if ((switchPrefix.includes(firstFourDigits)) || (switchPrefix.includes(firstSixDigits)) && (switchLength.includes(cardLength))) {
     return 'Switch';
   }

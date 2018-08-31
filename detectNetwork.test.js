@@ -136,7 +136,6 @@ describe('Maestro', function() {
 
 });
 
-//China UnionPay   prefix 622126-622925, 624-626, 6282-6288  length 6-19
 describe('China UnionPay', function() {
   var expect = chai.expect;
   var str = '8';
@@ -167,20 +166,53 @@ describe('China UnionPay', function() {
     })(length)}
   })(prefix)} 
 
-      for (var prefix = 6282; prefix <= 6288; prefix++) {
-      (function(prefix) {
+  for (var prefix = 6282; prefix <= 6288; prefix++) {
+    (function(prefix) {
 
-    for (var length = 6; length <= 19; length++) {
-    (function(length) {
+      for (var length = 6; length <= 19; length++) {
+        (function(length) {
 
-      it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
-        expect(detectNetwork(prefix + str.repeat(length - 4))).to.equal('China UnionPay');
-      });
-      
-    })(length)}
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          expect(detectNetwork(prefix + str.repeat(length - 4))).to.equal('China UnionPay');
+        });
+        
+      })(length)}
   })(prefix)} 
 
-  });
+});
 
 // Switch   prefix 4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759   length 16, 18, or 19
-describe('should support Switch')
+describe('Switch', function() {
+  var expect = chai.expect;
+  var str = '8';
+  var switchPrefix = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  var switchLength = [16, 18, 19];
+
+  for (i = 0; i < switchPrefix.length; i++) {
+    for (j = 0; j < switchLength; j++) {
+
+      it('has a prefix of' + switchPrefix[i] + 'and a length of ' + switchLength[j], function() {
+        expect(detectNetwork(switchPrefix[i]+ str.repeat(switchLength[j] - switchPrefix[i].toString('').length))).to.equal('Switch');
+      });
+    }
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
