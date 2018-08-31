@@ -90,7 +90,6 @@ describe('Discover', function() {
   it('has a prefix of 6011 and a length of 19', function() {
     expect(detectNetwork('6011123456789012345')).to.equal('Discover');
   });
-<<<<<<< HEAD
   it('has a prefix of 65 and a length of 16', function() {
     expect(detectNetwork('6511123456789012')).to.equal('Discover');
   });
@@ -107,8 +106,6 @@ describe('Discover', function() {
         expect(detectNetwork(prefix + '1234567890123456')).to.equal('Discover');
       });
     })(prefix)}
-=======
->>>>>>> parent of e46d39e... Add more tests for Discover
 });
 
 // Maestro    prefix 5018, 5020, 5038, 6304   length 12-19
