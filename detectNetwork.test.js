@@ -189,14 +189,20 @@ describe('Switch', function() {
   var switchLength = [16, 18, 19];
 
   for (i = 0; i < switchPrefix.length; i++) {
-    for (j = 0; j < switchLength; j++) {
+    (function(i) {
 
-      it('has a prefix of' + switchPrefix[i] + 'and a length of ' + switchLength[j], function() {
-        expect(detectNetwork(switchPrefix[i]+ str.repeat(switchLength[j] - switchPrefix[i].toString('').length))).to.equal('Switch');
-      });
-    }
-  }
+      for (j = 0; j < switchLength.length; j++) {
+        (function(j) {
+
+          it('has a prefix of' + switchPrefix[i] + 'and a length of ' + switchLength[j], function() {
+            expect(detectNetwork(switchPrefix[i]+ str.repeat(switchLength[j] - switchPrefix[i].toString().length))).to.equal('Switch');
+          });        
+
+      })(j)}
+  })(i)}
+  
 });
+
 
 
 
