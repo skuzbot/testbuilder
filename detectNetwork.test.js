@@ -194,13 +194,13 @@ describe('Switch', function() {
       for (j = 0; j < switchLength.length; j++) {
         (function(j) {
 
-          it('has a prefix of' + switchPrefix[i] + 'and a length of ' + switchLength[j], function() {
+          it('has a prefix of ' + switchPrefix[i] + ' and a length of ' + switchLength[j], function() {
             expect(detectNetwork(switchPrefix[i]+ str.repeat(switchLength[j] - switchPrefix[i].toString().length))).to.equal('Switch');
           });        
 
       })(j)}
   })(i)}
-  
+
 });
 
 
